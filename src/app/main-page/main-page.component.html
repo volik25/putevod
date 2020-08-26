@@ -1,0 +1,14 @@
+<div class="main">
+    <div id="head">Путеводитель первокурсника</div>
+    <div id="underHead">Часто задаваемые вопросы</div>
+    <div class="d-flex">
+        <div class="questions-left">
+            <div *ngFor='let faq of faqs1; let i=index' class="questions">{{faq}}</div>
+        </div>
+        <div class="img-block"><img src="../../assets/IMG_5341.png"></div>
+        <div class="questions-right">
+            <div *ngFor='let faq of faqs2; let i=index' class="questions">{{faq}}</div>
+        </div>
+    </div>
+</div>
+<search-page></search-page>

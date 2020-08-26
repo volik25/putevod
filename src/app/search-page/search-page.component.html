@@ -1,0 +1,15 @@
+<div class="search">
+    <input type="text" placeholder="Что тебя интересует?">
+    <i class="fas fa-search"></i>
+</div>
+<div class="questions d-flex justify-content-around">
+    <div class="ql d-flex flex-column justify-content-between">
+        <div *ngFor="let ques of ql" style="cursor: pointer" (click)="showAnswer(ques.id)">{{ques.question}}</div>
+    </div>
+    <div class="qc d-flex flex-column justify-content-between">
+        <div *ngFor="let ques of qc" style="cursor: pointer" (click)="showAnswer(ques.id)">{{ques}}</div>
+    </div>
+    <div class="qr d-flex flex-column justify-content-between">
+        <div *ngFor="let ques of qr" style="cursor: pointer" (click)="showAnswer(ques.id)">{{ques}}</div>
+    </div>
+</div>
