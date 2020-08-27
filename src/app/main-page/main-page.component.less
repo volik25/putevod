@@ -25,40 +25,41 @@
     .questions-left{
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: flex-start;
+        align-items: flex-end;
         width: 33%;
-        &:first-child{
-            align-items: flex-end;
-        }
-        &:last-child{
-            align-items: flex-start;
-        }
     }
     .img-block{
         width: 33%;
+        margin-top: 40px;
     }
     .questions-right{
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: flex-start;
         width: 33%;
-        &:first-child{
-            align-items: flex-end;
-        }
-        &:last-child{
-            align-items: flex-start;
-        }
     }
     .questions{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
         background: #FFFFFF;
+        cursor: pointer;
         font-family: Gilroy;
         font-style: normal;
         font-weight: normal;
         border-radius: 20px;
+        height: 70px;
         width: 60%;
-        margin: 20px;
         padding: 10px;
+        margin: 10px;
     }
+}
+
+.footer{
+    height: 10%;
+    padding: 10px;
 }
 
 img{

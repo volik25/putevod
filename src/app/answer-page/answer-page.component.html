@@ -1,7 +1,7 @@
 <div *ngIf="question">
     <div class="header d-flex justify-content-center align-items-center">{{question.question}}</div>
     <div class="p-3" [innerHTML]="question.answer"></div>
-    <div class="image">
+    <div class="image" *ngIf="question.img">
         <img src="{{question.img}}">
     </div>
     <button type="button" class="btn btn-outline-dark m-2" (click)="activeModal.close('Close click')">Закрыть</button>

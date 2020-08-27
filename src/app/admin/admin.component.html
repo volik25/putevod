@@ -1,4 +1,9 @@
-<div class="w-100 d-flex justify-content-end p-3">
+<div class="alert alert-success" role="alert">
+    Данные обновлены
+</div>
+<div class="w-100 d-flex justify-content-around p-3">
+    <button class="btn btn-primary" routerLink="">На главную</button>
+    <div class="d-flex justify-content-center align-items-center">Личный кабинет</div>
     <button class="btn btn-primary" (click)="exit()">Выйти</button>
 </div>
 <div class="d-flex flex-column align-items-center">
@@ -39,5 +44,6 @@
             <input type="text" class="form-control" id="isFAQuestion" formControlName="isFAQuestion">
         </div>
         <button type="submit" class="btn btn-primary">Сохранить</button>
+        <button *ngIf="item" type="button" class="btn btn-outline-danger mx-3" (click)="removeQuestion(item.id, item.img)">Удалить</button>
     </form>
 </div>

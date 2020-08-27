@@ -3,12 +3,15 @@
     <div id="underHead">Часто задаваемые вопросы</div>
     <div class="d-flex">
         <div class="questions-left">
-            <div *ngFor='let faq of faqs1; let i=index' class="questions">{{faq}}</div>
+            <div *ngFor='let faq of faqsl; let i=index' class="questions" (click)="showAnswer(faq.id)">{{faq.isFAQuestion}}</div>
         </div>
         <div class="img-block"><img src="../../assets/IMG_5341.png"></div>
         <div class="questions-right">
-            <div *ngFor='let faq of faqs2; let i=index' class="questions">{{faq}}</div>
+            <div *ngFor='let faq of faqsr; let i=index' class="questions" (click)="showAnswer(faq.id)">{{faq.isFAQuestion}}</div>
         </div>
     </div>
 </div>
 <search-page></search-page>
+<div class="footer d-flex justify-content-center align-items-center w-100">
+    Все права защищены | 2020 | Разработано Информационным Комитетом
+</div>

@@ -38,34 +38,17 @@ export class EnterFormComponent implements OnInit {
       }
       return;
     }
-    this.api.signIn(this.enterForm.getRawValue()).subscribe(
+    const subs = this.api.signIn(this.enterForm.getRawValue()).subscribe(
       (token) => {
-        console.log(token);
         if (token) {
           this.auth.setToken(token);
           this.router.navigate(['/admin']);
         } else {
           this.showError = true;
         }
+        this.loadingService.removeSubscription(subs);
       }
     )
-    // const subscription = this.api.signIn(this.enterForm.getRawValue()).subscribe(
-    //   (token) => {
-    //     console.log(token, this.enterForm.getRawValue());
-    //     if (token) {
-    //       this.auth.setToken(token);
-    //       this.router.navigate([this.auth.redirectUrl]);
-    //     } else {
-    //       this.showError = true;
-    //     }
-    //     this.loadingService.removeSubscription(subscription);
-
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //     this.loadingService.removeSubscription(subscription);
-    //   }
-    // )
-    // this.loadingService.addSubscription(subscription);
+    this.loadingService.addSubscription(subs);
   }
 }

@@ -32,12 +32,24 @@ export class ApiService {
     return this.http.post<any>(`${this.baseUrl}?key=update-question`, item);
   }
 
+    public removeQuestion(item): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}?key=remove-question`, item);
+  }
+
   public uploadImg(data): Observable<string> {
     return this.http.post<string>(`${this.baseUrl}?key=upload-img`, data);
   }
 
-  public getHeaders(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}?key=get-headers`);
+  public getHeaders(limit: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}?key=get-headers&limit=${limit}`);
+  }
+
+  public getFAQs(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}?key=get-FAQs`);
+  }
+
+  public search(str): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}?key=search`, str);
   }
 
   public signIn(userData): Observable<string> {

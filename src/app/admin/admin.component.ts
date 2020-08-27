@@ -31,13 +31,14 @@ export class AdminComponent implements OnInit {
               private loadingService: LoadingService) { }
 
   ngOnInit() {
-    this.api.getQuestions().subscribe(questions => {
-      this.questions = questions;
-    })
     this.initForm();
   }
 
   public initForm(){
+    const subs = this.api.getQuestions().subscribe(questions => {
+      this.questions = questions;
+      this.loadingService.removeSubscription(subs);
+    });
     this.addForm = this.fb.group({
       question:[null, Validators.required],
       answer:[null, Validators.required],
@@ -45,6 +46,7 @@ export class AdminComponent implements OnInit {
       isFAQ: [false],
       isFAQuestion: [null]
     })
+    this.loadingService.addSubscription(subs);
   }
 
   public setForm(id){
@@ -77,19 +79,17 @@ export class AdminComponent implements OnInit {
   save(){
     const form = this.addForm.getRawValue();
     this.subs = this.uploadCarImg(form.img).subscribe((data) => {
-      console.log(data);
       form.img = data;
       if (this.item) {
         form.id = this.item.id;
         form.oldImg = this.item.img;
         const subscription = this.api.updateQuestion(form).subscribe(() => {
+          this.initForm();
           this.loadingService.removeSubscription(subscription);
         });
         this.loadingService.addSubscription(subscription);
       } else {
         const subscription = this.api.addQuestion(form).subscribe((id) => {
-          form.id = id
-          this.questions.push(form);
           this.initForm();
           this.loadingService.removeSubscription(subscription);
         });
@@ -98,6 +98,14 @@ export class AdminComponent implements OnInit {
       this.loadingService.removeSubscription(this.subs);
     });
     this.loadingService.addSubscription(this.subs);
+  }
+
+  removeQuestion(id, img){
+    const subscription = this.api.removeQuestion({id: id, filelink: img}).subscribe(() => {
+      this.initForm();
+      this.loadingService.removeSubscription(subscription);
+    });
+    this.loadingService.addSubscription(subscription);
   }
 
   uploadCarImg(img): Observable<string> {
