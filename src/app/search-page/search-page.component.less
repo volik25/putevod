@@ -1,5 +1,5 @@
 .search{
-    padding-top: 10px;
+    padding-top: 25px;
     width: 60%;
     margin: auto;
     input{
@@ -9,12 +9,19 @@
         background-color: #F7A192;
         color: #FFFFFF;
         padding: 5px;
+        &:focus, &:active{
+            border: 3px solid #F7A192;
+            border-radius: 10px;
+        }
         &::placeholder{
             color: #FFFFFF;
         }
     }
     i{
-        position: absolute;
+        color: #FFFFFF;
+        margin-left: -30px;
+        z-index: 5;
+        cursor: pointer;
     }
 }
 .questions{

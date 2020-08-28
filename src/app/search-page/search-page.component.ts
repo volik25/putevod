@@ -29,6 +29,9 @@ export class SearchPageComponent implements OnInit {
       search: [null, Validators.required]
     });
     const subs = this.api.getHeaders(27).subscribe(questions => {
+      this.ql = [];
+      this.qc = [];
+      this.qr = [];
       this.questions = questions;
       let k = 1;
       this.questions.forEach(el => {
@@ -61,21 +64,6 @@ export class SearchPageComponent implements OnInit {
     if (str.search) {
       const subs = this.api.search(str).subscribe(res => {
         this.questions = res;
-        //const length = this.questions.length;
-        // if (length <= 10) {
-        //   this.ql = [];
-        //   this.qc = this.questions;
-        //   this.qr = [];
-        // }
-        // if (length%2 == 0 && length>10) {
-        //   for (let i = 0; i < this.questions.length/2; i++) {
-        //     this.ql.push(this.questions[i]);
-        //   }
-        //   for (let i = this.questions.length/2; i < this.questions.length; i++) {
-        //     this.ql.push(this.questions[i]);
-        //   }
-        //   this.qc = [];
-        // }
         this.ql = [];
         this.qc = this.questions;
         this.qr = [];

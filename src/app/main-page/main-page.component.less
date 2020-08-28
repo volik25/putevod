@@ -1,5 +1,6 @@
 .main{
     background-image: url(../../assets/backgroundimage.png);
+    background-repeat: no-repeat;
     background-size: 100%;
     #head{
         font-family: 'Gilroy';
@@ -8,36 +9,73 @@
         font-size: 30px;
         line-height: normal;
         color: #FFFFFF;
-        width: 20%;
         padding-top: 20px;
-        margin-left: 40px;
+        margin-left: 60px;
     }
     #underHead{
         font-family: 'Gilroy';
         font-style: normal;
         font-weight: 500;
         color: #FFFFFF;
-        width: 30%;
-        margin-left: 50px;
+        margin-left: 90px;
         margin-top: 20px;
         margin-bottom: 20px;
+    }
+    .header{
+        width: 50%;
+    }
+    .logos{
+        width: 50%;
+        padding-right: 70px;
+        img{
+            cursor: pointer;
+            height: 60px;
+            margin-top: 10px;
+            margin-right: 10px;
+            border: 2px solid #FFFFFF;
+            box-shadow: 5px 2px 5px #FFFFFF;
+        }
     }
     .questions-left{
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
+        width: 40%;
         align-items: flex-end;
-        width: 33%;
+        .questions{
+            &:first-child{
+                margin-right: 20%;
+            }
+            &:nth-child(2){
+                margin-right: 10%;
+            }
+            &:last-child{
+                margin-right: 0%;
+            }
+        }
     }
     .img-block{
-        width: 33%;
+        width: 20%;
         margin-top: 40px;
+        img{
+            width: 100%;
+        }
     }
     .questions-right{
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
-        width: 33%;
+        width: 40%;
+        align-items: flex-start;
+        .questions{
+            &:first-child{
+                margin-left: 20%;
+            }
+            &:nth-child(2){
+                margin-left: 10%;
+            }
+            &:last-child{
+                margin-left: 0%;
+            }
+        }
     }
     .questions{
         display: flex;
@@ -46,12 +84,12 @@
         text-align: center;
         background: #FFFFFF;
         cursor: pointer;
-        font-family: Gilroy;
+        font-family: 'Gilroy';
         font-style: normal;
         font-weight: normal;
         border-radius: 20px;
-        height: 70px;
-        width: 60%;
+        min-height: 40px;
+        max-height: 70px;
         padding: 10px;
         margin: 10px;
     }
@@ -60,9 +98,4 @@
 .footer{
     height: 10%;
     padding: 10px;
-}
-
-img{
-    width: 100%;
-    margin: auto;
 }

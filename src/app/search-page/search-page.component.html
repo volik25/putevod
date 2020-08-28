@@ -1,6 +1,7 @@
 <div class="search">
-    <form [formGroup]="searchForm" (submit)="search()">
+    <form [formGroup]="searchForm" (submit)="search()" class="d-flex justify-content-center align-items-center">
         <input type="text" placeholder="Что тебя интересует?" formControlName="search">
+        <i class="fas fa-search" (click)="search()"></i>
     </form>
 </div>
 <div class="questions d-flex justify-content-around" *ngIf="questions">

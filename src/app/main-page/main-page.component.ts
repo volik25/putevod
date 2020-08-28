@@ -40,4 +40,7 @@ export class MainPageComponent implements OnInit {
       });
   }
 
+  link(url){
+    window.open(url);
+  }
 }

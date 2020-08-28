@@ -19,6 +19,9 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { FilesManagerComponent } from './files-manager/files-manager.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { LoaderComponent } from './loader/loader.component';
+import { PutevodAlertComponent } from './alert/alert.component';
+import { AlertModule } from 'ngx-bootstrap';
+import { AlertService } from './services/alert.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,8 @@ import { LoaderComponent } from './loader/loader.component';
     EnterFormComponent,
     AdminComponent,
     LoaderComponent,
-    FilesManagerComponent
+    FilesManagerComponent,
+    PutevodAlertComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +42,8 @@ import { LoaderComponent } from './loader/loader.component';
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
-    CKEditorModule
+    CKEditorModule,
+    AlertModule.forRoot()
   ],
   providers: [
     ApiService,
@@ -46,6 +51,7 @@ import { LoaderComponent } from './loader/loader.component';
     AdminSecurity,
     LoadingService,
     AuthService,
+    AlertService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
@@ -7,6 +7,8 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Question } from '../models/questions';
 import { Observable, of, Subscription } from 'rxjs';
 import { LoadingService } from '../services/loading.service';
+import { AlertService } from '../services/alert.service';
+import { AlertType, PutevodAlertComponent } from '../alert/alert.component';
 
 @Component({
   selector: 'admin',
@@ -14,8 +16,11 @@ import { LoadingService } from '../services/loading.service';
   styleUrls: ['./admin.component.less']
 })
 export class AdminComponent implements OnInit {
+
+  alert:PutevodAlertComponent;
+
+  subs: Subscription = new Subscription();
   addForm:FormGroup;
-  public subs: Subscription = new Subscription()
   description = '';
   questions: Question[];
   item: Question;
@@ -28,9 +33,14 @@ export class AdminComponent implements OnInit {
     editorData: this.description
   };
   constructor(private api: ApiService, private auth: AuthService, private router: Router, private fb: FormBuilder, 
-              private loadingService: LoadingService) { }
+              private loadingService: LoadingService, private as: AlertService) { }
 
   ngOnInit() {
+    this.as.alert = this.alert;
+    // this.as.alert.showAlert({
+    //   type: AlertType.Warning,
+    //   message: 'Страница загружена'
+    // });
     this.initForm();
   }
 
@@ -78,20 +88,33 @@ export class AdminComponent implements OnInit {
 
   save(){
     const form = this.addForm.getRawValue();
-    this.subs = this.uploadCarImg(form.img).subscribe((data) => {
+    this.subs = this.uploadImg(form.img).subscribe((data) => {
       form.img = data;
       if (this.item) {
         form.id = this.item.id;
         form.oldImg = this.item.img;
         const subscription = this.api.updateQuestion(form).subscribe(() => {
-          this.initForm();
+          delete form.oldImg;
+          for (let i = 0; i < this.questions.length; i++) {
+            if (this.questions[i].id == form.id) {
+              this.questions[i] = form;
+            }
+          }
           this.loadingService.removeSubscription(subscription);
+          // this.as.alert.showAlert({
+          //   type: AlertType.Info,
+          //   message: 'Вопрос обновлен'
+          // })
         });
         this.loadingService.addSubscription(subscription);
       } else {
         const subscription = this.api.addQuestion(form).subscribe((id) => {
           this.initForm();
           this.loadingService.removeSubscription(subscription);
+          // this.as.alert.showAlert({
+          //   type: AlertType.Success,
+          //   message: 'Вопрос добавлен'
+          // })
         });
         this.loadingService.addSubscription(subscription);
       }
@@ -104,11 +127,15 @@ export class AdminComponent implements OnInit {
     const subscription = this.api.removeQuestion({id: id, filelink: img}).subscribe(() => {
       this.initForm();
       this.loadingService.removeSubscription(subscription);
+      // this.as.alert.showAlert({
+      //   type: AlertType.Success,
+      //   message: 'Вопрос удален'
+      // })
     });
     this.loadingService.addSubscription(subscription);
   }
 
-  uploadCarImg(img): Observable<string> {
+  uploadImg(img): Observable<string> {
     if (img instanceof File) {
       const formData = new FormData();
       formData.append('qImage', img, img.name.replace(' ', '_'));
