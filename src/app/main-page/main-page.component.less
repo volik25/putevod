@@ -88,7 +88,7 @@
         font-style: normal;
         font-weight: normal;
         border-radius: 20px;
-        min-height: 40px;
+        min-height: 10px;
         max-height: 70px;
         padding: 10px;
         margin: 10px;
@@ -98,4 +98,28 @@
 .footer{
     height: 10%;
     padding: 10px;
+    text-align: center;
+}
+
+@media(max-width: 512px){
+    .logos{
+        padding-right: 0px !important;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    #head{
+        font-size: 15px !important;
+    }
+    #underHead{
+        display: none !important;
+    }
+    .img-block{
+        display: none !important;
+    }
+    .questions-right{
+        display: none !important;
+    }
+    .questions-left{
+        display: none !important;
+    }
 }
