@@ -13,6 +13,7 @@ import { LoadingService } from '../services/loading.service';
 })
 export class SearchPageComponent implements OnInit {
   public searchForm: FormGroup;
+  public loadComplete = false;
   public questions: Question[] = [];
   public ql:Question[] = [];
   public qc:Question[] = [];
@@ -47,6 +48,7 @@ export class SearchPageComponent implements OnInit {
         k++;
       });
       this.loadingService.removeSubscription(subs);
+      this.loadComplete = true;
     });
     this.loadingService.addSubscription(subs);
   }

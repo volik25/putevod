@@ -15,6 +15,6 @@
         <div *ngFor="let ques of qr" (click)="showAnswer(ques.id)">{{ques.question}}</div>
     </div>
 </div>
-<div class="w-100 d-flex justify-content-center align-items-center" *ngIf="questions.length == 0">
+<div class="w-100 d-flex justify-content-center align-items-center" *ngIf="questions.length == 0 && loadComplete">
     <h3>Нет совпадений поиска</h3>
 </div>
