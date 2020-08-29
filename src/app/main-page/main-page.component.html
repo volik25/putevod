@@ -2,20 +2,24 @@
     <div class="d-flex small">
         <div class="header">
             <div id="head">Путеводитель первокурсника</div>
-            <div id="underHead">Часто задаваемые вопросы</div>
         </div>
-        <div class="d-flex align-items-center justify-content-end logos">
+        <div class="d-flex align-items-start justify-content-end logos">
             <img src="../../assets/IK.png" title='Информационный комитет' (click)="link('https://vk.com/icsst')">
             <img src="../../assets/SSt.png" title="Студенческий совет Финансового университета" (click)="link('https://vk.com/finsst')">
         </div>
     </div>
-    <div class="d-flex">
-        <div class="questions-left">
-            <div *ngFor='let faq of faqsl; let i=index' class="questions" (click)="showAnswer(faq.id)">{{faq.isFAQuestion}}</div>
+    <div class="d-flex flex-column FAQs">
+        <div>
+            <div id="underHead">Часто задаваемые вопросы</div>
         </div>
-        <div class="img-block"><img src="../../assets/IMG_5341.png"></div>
-        <div class="questions-right">
-            <div *ngFor='let faq of faqsr; let i=index' class="questions" (click)="showAnswer(faq.id)">{{faq.isFAQuestion}}</div>
+        <div class="d-flex">
+            <div class="questions-left">
+                <div *ngFor='let faq of faqsl; let i=index' class="questions" (click)="showAnswer(faq.id)">{{faq.isFAQuestion}}</div>
+            </div>
+            <div class="img-block"><img src="../../assets/IMG_5341.png"></div>
+            <div class="questions-right">
+                <div *ngFor='let faq of faqsr; let i=index' class="questions" (click)="showAnswer(faq.id)">{{faq.isFAQuestion}}</div>
+            </div>
         </div>
     </div>
 </div>

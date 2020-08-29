@@ -1,8 +1,12 @@
 .header{
     background-image: url('../../assets/OTVETbackgroundimage.png');
     height: 150px;
-    padding-left: 10px;
+    font-style: normal;
+    font-weight: bold;
     font-size: 30px;
+    line-height: normal;
+    color: #FFFFFF;
+    padding-left: 20px;
 }
 
 .image{
@@ -14,9 +18,19 @@
 }
 
 .closeButt{
+    background-color: #FC785C;
+    border: 1px solid #FC785C;
     position: absolute;
     right: -40px;
     box-shadow: none;
+    &:active{
+        background-color: #fd684b !important;
+        border: 1px solid #fd684b !important;
+        box-shadow: none !important;
+    }
+    &:hover{
+        box-shadow: #fd684b !important;
+    }
 }
 
 @media(max-width: 512px){
