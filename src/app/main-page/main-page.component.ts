@@ -16,7 +16,6 @@ export class MainPageComponent implements OnInit {
 
   ngOnInit() {
     const subs = this.api.getFAQs().subscribe(FAQs => {
-      console.log(FAQs);
       for (let i = 0; i < 3; i++) {
         const id = Math.floor(Math.random()*FAQs.length);
         this.faqsl.push(FAQs[id]);

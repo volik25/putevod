@@ -29,24 +29,58 @@ export class SearchPageComponent implements OnInit {
     this.searchForm = this.fb.group({
       search: [null, Validators.required]
     });
-    const subs = this.api.getHeaders(27).subscribe(questions => {
+    const subs = this.api.getHeaders().subscribe(questions => {
+      console.log(questions);
       this.ql = [];
       this.qc = [];
       this.qr = [];
       this.questions = questions;
-      let k = 1;
-      this.questions.forEach(el => {
-        if (k<=9) {
-          this.ql.push(el);
-        };
-        if (k>9&&k<=18) {
-          this.qc.push(el);
+      const k = this.questions.length;
+      if (k%3 == 0) {
+        const p = k/3;
+        for (let i = 0; i < this.questions.length; i++) {
+          const el = this.questions[i];
+          if (i<p) {
+            this.ql.push(el)
+          }
+          if (i>=p && i<p*2) {
+            this.qc.push(el)
+          }
+          if (i>=p*2) {
+            this.qr.push(el);
+          }
         }
-        if (k>18) {
-          this.qr.push(el);
+      }
+      if (k%3 == 1) {
+        const p = (k-1)/3;
+        for (let i = 0; i < this.questions.length; i++) {
+          const el = this.questions[i];
+          if (i<p) {
+            this.ql.push(el)
+          }
+          if (i>=p && i<p*2+1) {
+            this.qc.push(el)
+          }
+          if (i>=p*2+1) {
+            this.qr.push(el);
+          }
         }
-        k++;
-      });
+      }
+      if (k%3 == 2) {
+        const p = (k-2)/3;
+        for (let i = 0; i < this.questions.length; i++) {
+          const el = this.questions[i];
+          if (i<p+1) {
+            this.ql.push(el)
+          }
+          if (i>=p+1 && i<p*2+1) {
+            this.qc.push(el)
+          }
+          if (i>=p*2+1) {
+            this.qr.push(el);
+          }
+        }
+      }
       this.loadingService.removeSubscription(subs);
       this.loadComplete = true;
     });

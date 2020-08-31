@@ -126,6 +126,7 @@ export class AdminComponent implements OnInit {
   removeQuestion(id, img){
     const subscription = this.api.removeQuestion({id: id, filelink: img}).subscribe(() => {
       this.initForm();
+      this.item = null;
       this.loadingService.removeSubscription(subscription);
       // this.as.alert.showAlert({
       //   type: AlertType.Success,

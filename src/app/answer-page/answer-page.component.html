@@ -3,8 +3,8 @@
 </button>
 <div *ngIf="question">
     <div class="header d-flex justify-content-start align-items-center">{{question.question}}</div>
-    <div class="p-3" [innerHTML]="question.answer"></div>
     <div class="image" *ngIf="question.img">
         <img src="{{question.img}}">
     </div>
+    <div class="p-3" [innerHTML]="question.answer"></div>
 </div>
