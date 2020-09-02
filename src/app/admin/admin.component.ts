@@ -2,11 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Question } from '../models/questions';
 import { Observable, of, Subscription } from 'rxjs';
 import { LoadingService } from '../services/loading.service';
+import { ProgAlertComponent, AlertType } from '../prog-alert/prog-alert.component';
 
 @Component({
   selector: 'admin',
@@ -15,11 +16,15 @@ import { LoadingService } from '../services/loading.service';
 })
 export class AdminComponent implements OnInit {
 
+  @ViewChild('alert') alert:ProgAlertComponent;
+
+  public k: number;
   subs: Subscription = new Subscription();
   addForm:FormGroup;
   description = '';
   questions: Question[];
   item: Question;
+  selection: FormControl = new FormControl();
   public Editor = ClassicEditor;
   public config = {
     language: 'ru',
@@ -32,18 +37,15 @@ export class AdminComponent implements OnInit {
               private loadingService: LoadingService) { }
 
   ngOnInit() {
-    // this.as.alert.showAlert({
-    //   type: AlertType.Warning,
-    //   message: 'Страница загружена'
-    // });
     this.initForm();
-  }
-
-  public initForm(){
     const subs = this.api.getQuestions().subscribe(questions => {
       this.questions = questions;
       this.loadingService.removeSubscription(subs);
     });
+    this.loadingService.addSubscription(subs);
+  }
+
+  public initForm(){
     this.addForm = this.fb.group({
       question:[null, Validators.required],
       answer:[null, Validators.required],
@@ -51,12 +53,11 @@ export class AdminComponent implements OnInit {
       isFAQ: [false],
       isFAQuestion: [null]
     })
-    this.loadingService.addSubscription(subs);
   }
 
   public setForm(id){
     if (id == 0) {
-      this.addForm.reset();
+      this.initForm();
       this.item = null;
     }
     else{
@@ -93,23 +94,26 @@ export class AdminComponent implements OnInit {
           for (let i = 0; i < this.questions.length; i++) {
             if (this.questions[i].id == form.id) {
               this.questions[i] = form;
+              this.selection.setValue(form.id);
             }
           }
           this.loadingService.removeSubscription(subscription);
-          // this.as.alert.showAlert({
-          //   type: AlertType.Info,
-          //   message: 'Вопрос обновлен'
-          // })
+          this.alert.showAlert({
+            type: AlertType.Success,
+            message: 'Вопрос обновлен'
+          })
         });
         this.loadingService.addSubscription(subscription);
       } else {
         const subscription = this.api.addQuestion(form).subscribe((id) => {
+          form.id = id;
+          this.questions.push(form);
           this.initForm();
           this.loadingService.removeSubscription(subscription);
-          // this.as.alert.showAlert({
-          //   type: AlertType.Success,
-          //   message: 'Вопрос добавлен'
-          // })
+          this.alert.showAlert({
+            type: AlertType.Success,
+            message: 'Вопрос добавлен'
+          })
         });
         this.loadingService.addSubscription(subscription);
       }
@@ -120,13 +124,20 @@ export class AdminComponent implements OnInit {
 
   removeQuestion(id, img){
     const subscription = this.api.removeQuestion({id: id, filelink: img}).subscribe(() => {
+      for (let i = 0; i < this.questions.length; i++) {
+        if (this.questions[i].id == id) {
+           this.k = i;
+          break;
+        }
+      }
+      this.questions.splice(this.k, 1);
       this.initForm();
       this.item = null;
       this.loadingService.removeSubscription(subscription);
-      // this.as.alert.showAlert({
-      //   type: AlertType.Success,
-      //   message: 'Вопрос удален'
-      // })
+      this.alert.showAlert({
+        type: AlertType.Success,
+        message: 'Вопрос удален'
+      })
     });
     this.loadingService.addSubscription(subscription);
   }

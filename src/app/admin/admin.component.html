@@ -6,7 +6,7 @@
 <div class="d-flex flex-column align-items-center mb-5">
     <div class="form-group">
         <label for="qSelect">Выберите вопрос</label>
-        <select class="form-control" id="qSelect" (change)="setForm($event.target.value)">
+        <select class="form-control" id="qSelect" [formControl]="selection" (change)="setForm(selection.value)">
             <option [value]="0"></option>
             <option *ngFor="let item of questions, let i = index" [value]="item.id">{{item.question}}</option>
         </select>
@@ -44,3 +44,4 @@
         <button *ngIf="item" type="button" class="btn btn-outline-danger mx-3" (click)="removeQuestion(item.id, item.img)">Удалить</button>
     </form>
 </div>
+<prog-alert #alert></prog-alert>

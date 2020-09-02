@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { ApiService } from '../services/api.service';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoadingService } from '../services/loading.service';
 
 @Component({
@@ -18,7 +17,7 @@ export class EnterFormComponent implements OnInit {
   public showError: boolean;
   constructor( private auth: AuthService, private api: ApiService,
               private loadingService: LoadingService, private router: Router,
-              private fb: FormBuilder, private activeModal: NgbActiveModal) {
+              private fb: FormBuilder) {
     this.enterForm = this.fb.group({
       login: [null, [Validators.required]],
       password: [null, [Validators.required]],

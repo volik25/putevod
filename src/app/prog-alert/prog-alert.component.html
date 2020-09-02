@@ -1,0 +1,6 @@
+<div class="prog-alert {{alerts.length?'show':''}}" >
+  <div class="mb-1" *ngFor="let alert of alerts">
+    <alert [type]="alert.type" [dismissOnTimeout]="3000" (onClosed)="onClosed(alert)">{{ alert.message }}</alert>
+  </div>
+</div>
+

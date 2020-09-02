@@ -20,6 +20,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { FilesManagerComponent } from './files-manager/files-manager.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { LoaderComponent } from './loader/loader.component';
+import { ProgAlertComponent } from './prog-alert/prog-alert.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { LoaderComponent } from './loader/loader.component';
     EnterFormComponent,
     AdminComponent,
     LoaderComponent,
-    FilesManagerComponent
+    FilesManagerComponent,
+    ProgAlertComponent
   ],
   imports: [
     BrowserModule,
