@@ -7,7 +7,8 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { SearchPageComponent } from './search-page/search-page.component';
 import { ApiService } from './services/api.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalModule, BsModalRef } from 'ngx-bootstrap/modal';
+import { AlertModule } from 'ngx-bootstrap/alert';
 import { AnswerPageComponent } from './answer-page/answer-page.component';
 import { EnterFormComponent } from './enter-form/enter-form.component';
 import { AdminComponent } from './admin/admin.component';
@@ -35,17 +36,18 @@ import { LoaderComponent } from './loader/loader.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgbModule,
+    ModalModule.forRoot(),
+    AlertModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
     CKEditorModule
   ],
   providers: [
     ApiService,
-    NgbActiveModal,
     AdminSecurity,
     LoadingService,
     AuthService,
+    BsModalRef,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]

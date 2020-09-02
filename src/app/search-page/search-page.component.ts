@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ApiService } from '../services/api.service';
 import { Question } from '../models/questions';
 import { AnswerPageComponent } from '../answer-page/answer-page.component';
@@ -18,8 +18,9 @@ export class SearchPageComponent implements OnInit {
   public ql:Question[] = [];
   public qc:Question[] = [];
   public qr:Question[] = [];
-  
-  constructor(public ms: NgbModal, private api: ApiService, private fb: FormBuilder, private loadingService: LoadingService) { }
+  public modal: BsModalRef;
+  constructor(public ms: BsModalService, private api: ApiService,
+              private fb: FormBuilder, private loadingService: LoadingService) { }
 
   ngOnInit() {
     this.initPage();
@@ -87,11 +88,10 @@ export class SearchPageComponent implements OnInit {
   }
 
   showAnswer(id){
-    const modal = this.ms.open(AnswerPageComponent, {centered: true, size: 'lg'});
-      modal.componentInstance.id = id;
-      modal.result.then((res)=>{
-        //this.closeResult = res;
-      });
+    const initialState = {
+      id: id
+    }
+    this.modal = this.ms.show(AnswerPageComponent, {initialState});
   }
 
   search(){

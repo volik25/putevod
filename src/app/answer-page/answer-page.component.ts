@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from '../services/api.service';
 import { Question } from '../models/questions';
 import { LoadingService } from '../services/loading.service';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'answer-page',
@@ -10,9 +10,9 @@ import { LoadingService } from '../services/loading.service';
   styleUrls: ['./answer-page.component.less']
 })
 export class AnswerPageComponent implements OnInit {
-  @Input() id: number;
+  id: number;
   question: Question;
-  constructor(public activeModal: NgbActiveModal, private api: ApiService, private loadingService: LoadingService) { }
+  constructor(public activeModal: BsModalRef, private api: ApiService, private loadingService: LoadingService) { }
 
   ngOnInit() {
     const subs = this.api.getQuestion(this.id).subscribe(question => {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { LoadingService } from '../services/loading.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BsModalService } from 'ngx-bootstrap/modal';
 import { AnswerPageComponent } from '../answer-page/answer-page.component';
 
 @Component({
@@ -12,7 +12,7 @@ import { AnswerPageComponent } from '../answer-page/answer-page.component';
 export class MainPageComponent implements OnInit {
   public faqsl = [];
   public faqsr = [];
-  constructor(private api: ApiService, private loadService: LoadingService, private ms: NgbModal) { }
+  constructor(private api: ApiService, private loadService: LoadingService, private ms: BsModalService) { }
 
   ngOnInit() {
     const subs = this.api.getFAQs().subscribe(FAQs => {
@@ -32,11 +32,10 @@ export class MainPageComponent implements OnInit {
   }
 
   showAnswer(id){
-    const modal = this.ms.open(AnswerPageComponent, {centered: true, size: 'lg'});
-      modal.componentInstance.id = id;
-      modal.result.then((res)=>{
-        //this.closeResult = res;
-      });
+    const initialState = {
+      id: id
+    }
+    const modal = this.ms.show(AnswerPageComponent, {initialState});
   }
 
   link(url){

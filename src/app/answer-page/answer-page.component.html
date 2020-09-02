@@ -1,7 +1,7 @@
-<button type="button" class="btn btn-warning closeButt" (click)="activeModal.close('Close click')">
-    <i class="fas fa-times"></i>
-</button>
 <div *ngIf="question">
+    <button type="button" class="btn btn-warning closeButt" (click)="activeModal.hide()">
+        <i class="fas fa-times"></i>
+    </button>
     <div class="header d-flex justify-content-start align-items-center">{{question.question}}</div>
     <div class="image" *ngIf="question.img">
         <img src="{{question.img}}">
