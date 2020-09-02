@@ -7,8 +7,6 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Question } from '../models/questions';
 import { Observable, of, Subscription } from 'rxjs';
 import { LoadingService } from '../services/loading.service';
-import { AlertService } from '../services/alert.service';
-import { AlertType, PutevodAlertComponent } from '../alert/alert.component';
 
 @Component({
   selector: 'admin',
@@ -16,8 +14,6 @@ import { AlertType, PutevodAlertComponent } from '../alert/alert.component';
   styleUrls: ['./admin.component.less']
 })
 export class AdminComponent implements OnInit {
-
-  alert:PutevodAlertComponent;
 
   subs: Subscription = new Subscription();
   addForm:FormGroup;
@@ -33,10 +29,9 @@ export class AdminComponent implements OnInit {
     editorData: this.description
   };
   constructor(private api: ApiService, private auth: AuthService, private router: Router, private fb: FormBuilder, 
-              private loadingService: LoadingService, private as: AlertService) { }
+              private loadingService: LoadingService) { }
 
   ngOnInit() {
-    this.as.alert = this.alert;
     // this.as.alert.showAlert({
     //   type: AlertType.Warning,
     //   message: 'Страница загружена'
