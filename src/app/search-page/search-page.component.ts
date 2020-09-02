@@ -30,7 +30,6 @@ export class SearchPageComponent implements OnInit {
       search: [null, Validators.required]
     });
     const subs = this.api.getHeaders().subscribe(questions => {
-      console.log(questions);
       this.ql = [];
       this.qc = [];
       this.qr = [];
