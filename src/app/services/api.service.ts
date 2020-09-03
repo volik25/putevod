@@ -8,7 +8,7 @@ import { Question } from '../models/questions';
 
 @Injectable()
 export class ApiService {
-  private baseUrl: string = "http://vdknf.beget.tech/PutevodBack/controller.php";
+  private baseUrl: string = "http://putevod.icsst.ru/PutevodBack/controller.php";
   constructor(private http: HttpClient) {}
 
   /** Проверка доступа админа */
