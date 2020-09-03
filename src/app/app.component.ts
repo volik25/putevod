@@ -1,6 +1,7 @@
 import { Component, HostListener, ChangeDetectorRef } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { LoadingService } from './services/loading.service';
+import { NgxMetrikaService } from '@kolkov/ngx-metrika';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,9 @@ export class AppComponent {
     this.router.navigate(['/admin']);
   }
   title = 'putevod';
-  constructor(public router:Router, public loadingService: LoadingService, private cdRef: ChangeDetectorRef){
+  constructor(public router:Router, public loadingService: LoadingService,
+              private cdRef: ChangeDetectorRef,
+              private ym: NgxMetrikaService){
     loadingService.changeDetectorRef = cdRef;
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {

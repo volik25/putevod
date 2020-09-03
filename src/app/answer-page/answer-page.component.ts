@@ -3,6 +3,7 @@ import { ApiService } from '../services/api.service';
 import { Question } from '../models/questions';
 import { LoadingService } from '../services/loading.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { NgxMetrikaService } from '@kolkov/ngx-metrika';
 
 @Component({
   selector: 'answer-page',
@@ -12,7 +13,9 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 export class AnswerPageComponent implements OnInit {
   id: number;
   question: Question;
-  constructor(public activeModal: BsModalRef, private api: ApiService, private loadingService: LoadingService) { }
+  constructor(public activeModal: BsModalRef,
+              private api: ApiService,
+              private loadingService: LoadingService){}
 
   ngOnInit() {
     const subs = this.api.getQuestion(this.id).subscribe(question => {

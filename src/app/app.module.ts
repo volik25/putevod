@@ -21,6 +21,8 @@ import { FilesManagerComponent } from './files-manager/files-manager.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { LoaderComponent } from './loader/loader.component';
 import { ProgAlertComponent } from './prog-alert/prog-alert.component';
+import { RouterModule } from '@angular/router';
+import { NgxMetrikaModule } from '@kolkov/ngx-metrika';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,16 @@ import { ProgAlertComponent } from './prog-alert/prog-alert.component';
     AlertModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
-    CKEditorModule
+    CKEditorModule,
+    RouterModule.forRoot([]),
+    NgxMetrikaModule.forRoot({
+      id: 66946393,
+      defer: true,
+      webvisor: true,
+      clickmap: true,
+      trackLinks: true,
+      accurateTrackBounce: true,
+    })
   ],
   providers: [
     ApiService,
