@@ -3,7 +3,6 @@ import { ApiService } from '../services/api.service';
 import { Question } from '../models/questions';
 import { LoadingService } from '../services/loading.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { NgxMetrikaService } from '@kolkov/ngx-metrika';
 
 @Component({
   selector: 'answer-page',
