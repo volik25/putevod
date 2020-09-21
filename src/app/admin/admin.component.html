@@ -6,7 +6,7 @@
 <div class="d-flex flex-column align-items-center mb-5">
     <div class="form-group">
         <label for="qSelect">Выберите вопрос</label>
-        <select class="form-control" id="qSelect" [formControl]="selection" (change)="setForm(selection.value)">
+        <select class="form-control" id="qSelect" [formControl]="selection">
             <option [value]="0"></option>
             <option *ngFor="let item of questions, let i = index" [value]="item.id">{{item.question}}</option>
         </select>

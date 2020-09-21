@@ -37,6 +37,16 @@ export class AdminComponent implements OnInit {
               private loadingService: LoadingService) { }
 
   ngOnInit() {
+    this.selection.valueChanges.subscribe(id => {
+      if (id == 0) {
+        this.initForm();
+        this.item = null;
+      }
+      else{
+        this.item = this.questions.find(x => x.id == id);
+        this.addForm.patchValue(this.item);
+      }
+    })
     this.initForm();
     const subs = this.api.getQuestions().subscribe(questions => {
       this.questions = questions;
@@ -53,17 +63,6 @@ export class AdminComponent implements OnInit {
       isFAQ: [false],
       isFAQuestion: [null]
     })
-  }
-
-  public setForm(id){
-    if (id == 0) {
-      this.initForm();
-      this.item = null;
-    }
-    else{
-      this.item = this.questions.find(x => x.id == id);
-      this.addForm.patchValue(this.item);
-    }
   }
 
   public onReady( editor ) {

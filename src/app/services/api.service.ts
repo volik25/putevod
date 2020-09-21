@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/internal/operators';
-//import { User } from '../models/user';
 import { Question } from '../models/questions';
-//import { NgbDate, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class ApiService {
-  private baseUrl: string = "http://putevod.icsst.ru/PutevodBack/controller.php";
+  private baseUrl: string = `${environment.url}PutevodBack/Controller.php?`;;
   constructor(private http: HttpClient) {}
 
   /** Проверка доступа админа */
