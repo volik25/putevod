@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class ApiService {
-  private baseUrl: string = `${environment.url}PutevodBack/Controller.php?`;;
+  private baseUrl: string = `${environment.url}PutevodBack/Controller.php`;;
   constructor(private http: HttpClient) {}
 
   /** Проверка доступа админа */
