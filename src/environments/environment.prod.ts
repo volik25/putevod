@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  url: 'http://putevod.icsst.ru/'
+  url: 'https://putevod.icsst.ru/'
 };
